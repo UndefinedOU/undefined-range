@@ -5,5 +5,17 @@ import './index.css';
 import Range from './components/Range'
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<Range value={25} max={100} min={0} step={2}/>, document.getElementById('root'));
+let style = {
+  margin: '50px',
+  padding: '10px',
+  width: '210px',
+  height: '125px',
+  'background-color': 'lightyellow'
+};
+ReactDOM.render(
+  <div style={style}>
+    <Range value={25} max={100} min={0} step={2}/>
+  </div>
+  , document.getElementById('root')
+);
 registerServiceWorker();

@@ -21,13 +21,13 @@ class Range extends React.Component {
     console.log(value); //eslint-disable-line
   }
   render() {
-    return (
-      <Slider value={this.state.value}
-        min={this.props.min} max={this.props.max} step={this.props.step}
-        vertical={true}
-        onChange={this.onSliderChange} onAfterChange={this.onAfterChange}
-      />
-    );
+    if (this.props.input) { return (
+      <Slider {...this.props} value={this.state.value}
+        onChange={this.onSliderChange} onAfterChange={this.onAfterChange}/>
+    )}
+    else { return (
+      <Slider />
+    )}
   }
 }
 
