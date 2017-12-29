@@ -7,9 +7,7 @@ import 'rc-slider/assets/index.css';
 class Range extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      value: this.props.value,
-    };
+    this.state = Object.assign({}, this.props);
   }
   onSliderChange = (value) => {
     console.log(value);
@@ -21,13 +19,11 @@ class Range extends React.Component {
     console.log(value); //eslint-disable-line
   }
   render() {
-    if (this.props.input) { return (
+    return (
       <Slider {...this.props} value={this.state.value}
-        onChange={this.onSliderChange} onAfterChange={this.onAfterChange}/>
-    )}
-    else { return (
-      <Slider />
-    )}
+        onChange={this.onSliderChange} onAfterChange={this.onAfterChange}
+      />
+    );
   }
 }
 
