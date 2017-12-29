@@ -21,7 +21,7 @@ class RangeGroup extends React.Component {
 }
 
 let style = {
-  margin: '50px',
+  margin: '20px',
   padding: '10px',
   width: '210px',
   height: '125px',
@@ -29,6 +29,7 @@ let style = {
 };
 ReactDOM.render(
   <div style={{padding: '20px'}}>
+    <Input value={123} icon="Y" style={{margin: '20px'}} />
     <RangeGroup style={style}>
       <Range value={50} min={0} max={100} />
     </RangeGroup>
