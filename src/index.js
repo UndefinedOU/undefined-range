@@ -14,15 +14,19 @@ class RangeGroup extends React.Component {
     this.state = {};
   }
   handleTextChange(val) {
-    console.log(`Value recieved by parent: ${val}`);
+    console.log(`Text value recieved by parent: ${val}`);
     this.setState({value: Number(val)});
-    console.log(this);
   };
+  handleSliderChange(val) {
+    console.log(`Slider value recieved by parent: ${val}`);
+    this.setState({value: Number(val)});
+  }
   render() {
     let mergeObj = {
-      handleTextChange: this.handleTextChange.bind(this)
+      handleTextChange: this.handleTextChange.bind(this),
+      handleSliderChange: this.handleSliderChange.bind(this)
     };
-    if (this.state.value) mergeObj.value = this.state.value;
+    if (this.state.value !== undefined) mergeObj.value = this.state.value;
     if (this.props.children.length === 2) { return (
       <div style={this.props.style}>
         {React.cloneElement(this.props.children[0],
@@ -41,11 +45,12 @@ class RangeGroup extends React.Component {
 }
 
 class Input extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      value: 0
-    };
+  constructor(props) {
+    super(props);
+    this.state = {value: this.props.value};
+  }
+  componentWillReceiveProps(nextProps) {
+    this.setState({value: nextProps.value})
   }
   handleUpdate(value) {
     this.props.handleTextChange && this.props.handleTextChange(value)
@@ -53,7 +58,8 @@ class Input extends React.Component {
   }
   render() {
     return (
-      <input {...this.state} onChange={e => this.handleUpdate(e.target.value)} />
+      <input {...this.state} value={this.state.value}
+       onChange={e => this.handleUpdate(e.target.value)} />
     )
   }
 }
@@ -69,12 +75,15 @@ let style = {
 ReactDOM.render(
   <div style={{padding: '20px'}}>
     <Input value={123} icon="Y" style={{margin: '20px'}} />
+
     <div style={style}>
       <Range value={30} min={0} max={200} />
     </div>
+
     <RangeGroup style={style}>
       <Range value={50} min={0} max={100} />
     </RangeGroup>
+
     <hr style={{marginTop: '50px'}}/>
     <RangeGroup style={style}>
       <Range value={80} min={0} max={150} />

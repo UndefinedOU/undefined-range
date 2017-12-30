@@ -12,21 +12,21 @@ class Range extends React.Component {
     }
   }
   componentWillReceiveProps(nextProps) {
-    this.setState({value: nextProps.value})
+    this.setState({value: Math.min(nextProps.value, this.props.max)})
   }
   onSliderChange = (value) => {
-    console.log(value);
-    this.setState({
-      value,
-    });
+    this.props.handleSliderChange && this.props.handleSliderChange(value)
+    this.setState({value: value});
   }
   onAfterChange = (value) => {
     console.log(value); //eslint-disable-line
   }
   render() {
     return (
-      <Slider {...this.props} value={this.state.value}
-        onChange={this.onSliderChange} onAfterChange={this.onAfterChange}
+      <Slider {...this.props}
+        value={this.state.value}
+        onChange={val => this.onSliderChange(val)}
+        onAfterChange={this.onAfterChange}
       />
     );
   }
