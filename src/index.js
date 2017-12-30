@@ -57,9 +57,22 @@ class Input extends React.Component {
     this.setState({value: value});
   }
   render() {
+    style = {
+      display: 'inlineBlock',
+      width: '60px',
+      margin: 0
+    };
+    if (this.props.side === 'left') {
+      style.marginRight = '10px';
+    }
+    if (this.props.side === 'right') {
+      style.marginLeft = '10px';
+    }
     return (
-      <input {...this.state} value={this.state.value}
-       onChange={e => this.handleUpdate(e.target.value)} />
+      <input {...this.state}
+        style={style}
+        value={this.state.value}
+        onChange={e => this.handleUpdate(e.target.value)} />
     )
   }
 }
@@ -74,8 +87,6 @@ let style = {
 
 ReactDOM.render(
   <div style={{padding: '20px'}}>
-    <Input value={123} icon="Y" style={{margin: '20px'}} />
-
     <div style={style}>
       <Range value={30} min={0} max={200} />
     </div>
@@ -85,6 +96,11 @@ ReactDOM.render(
     </RangeGroup>
 
     <hr style={{marginTop: '50px'}}/>
+    <RangeGroup style={style}>
+      <Input value={123} icon="Y" />
+      <Range value={80} min={0} max={150} />
+    </RangeGroup>
+
     <RangeGroup style={style}>
       <Range value={80} min={0} max={150} />
       <Input value={123} icon="Y" />
