@@ -22,22 +22,28 @@ class RangeGroup extends React.Component {
     this.setState({value: Number(val)});
   }
   render() {
+    let side1 = 'left', side2 = 'right';
     let mergeObj = {
       handleTextChange: this.handleTextChange.bind(this),
       handleSliderChange: this.handleSliderChange.bind(this)
     };
+    if (this.props.direction && (this.props.direction === 'vertical')) {
+      mergeObj.vertical = true;
+      side1 = 'top', side2 = 'bottom'
+    }
     if (this.state.value !== undefined) mergeObj.value = this.state.value;
+
     if (this.props.children.length === 2) { return (
       <div style={this.props.style}>
         {React.cloneElement(this.props.children[0],
-          Object.assign({side: 'left'}, mergeObj)
+          Object.assign({side: side1}, mergeObj)
         )}
         {React.cloneElement(this.props.children[1],
-          Object.assign({side: 'right'}, mergeObj)
+          Object.assign({side: side2}, mergeObj)
         )}
       </div>)}
     else { return (
-      <div style={this.props.style}>
+      <div style={{...this.props.style}}>
         {React.cloneElement(this.props.children, {
           side: 'only'})}
       </div>)}
@@ -60,14 +66,8 @@ class Input extends React.Component {
     style = {
       display: 'inlineBlock',
       width: '60px',
-      margin: 0
+      margin: '10px'
     };
-    if (this.props.side === 'left') {
-      style.marginRight = '10px';
-    }
-    if (this.props.side === 'right') {
-      style.marginLeft = '10px';
-    }
     return (
       <input {...this.state}
         style={style}
@@ -79,9 +79,8 @@ class Input extends React.Component {
 
 let style = {
   margin: '20px',
-  padding: '10px',
   width: '210px',
-  height: '125px',
+  height: '50px',
   'backgroundColor': 'lightyellow'
 };
 
@@ -104,6 +103,21 @@ ReactDOM.render(
     <RangeGroup style={style}>
       <Range value={80} min={0} max={150} />
       <Input value={123} icon="Y" />
+    </RangeGroup>
+
+    <hr style={{marginTop: '50px'}}/>
+    <div style={{...style, width: '30px', height: '200px'}}>
+      <Range value={30} min={0} max={200} vertical={true} />
+    </div>
+
+    <RangeGroup direction='vertical' style={{...style, height: '200px', width: '86px'}}>
+      <Range value={80} min={0} max={150} />
+      <Input value={123} icon="Y" />
+    </RangeGroup>
+
+    <RangeGroup direction='vertical' style={{...style, height: '200px', width: '86px'}}>
+      <Input value={123} icon="Y" />
+      <Range value={80} min={0} max={150} />
     </RangeGroup>
   </div>
   , document.getElementById('root')
