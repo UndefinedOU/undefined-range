@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
@@ -12,7 +11,11 @@ class Range extends React.Component {
     }
   }
   componentWillReceiveProps(nextProps) {
-    this.setState({value: Math.min(nextProps.value, this.props.max)});
+    let num = Number(nextProps.value);
+    if (isNaN(num)) num = (this.props.value || this.props.min || 0);
+    num = Math.max(num, this.props.min);
+    num = Math.min(num, this.props.max);
+    this.setState({value: num});
   }
   onSliderChange = (value) => {
     this.props.handleSliderChange && this.props.handleSliderChange(value)
