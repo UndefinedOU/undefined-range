@@ -73,6 +73,8 @@ class Range extends Component {
     return (
       <Slider {...this.props}
         vertical={direction === 'vertical'}
+        handleStyle={{ borderColor: '#ccc' }}
+        trackStyle={{ backgroundColor: '#aaa' }}
         style={style}
         value={this.state.value}
         onChange={val => this.onChange(val)}

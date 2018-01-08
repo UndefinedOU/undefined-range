@@ -89,6 +89,8 @@ var Range = function (_Component) {
 
       return React.createElement(Slider, Object.assign({}, this.props, {
         vertical: direction === 'vertical',
+        handleStyle: { borderColor: '#ccc' },
+        trackStyle: { backgroundColor: '#aaa' },
         style: style,
         value: this.state.value,
         onChange: function onChange(val) {
