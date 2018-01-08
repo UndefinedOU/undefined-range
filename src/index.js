@@ -1,18 +1,26 @@
 import './index.css';
 
+import styled from 'styled-components';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Input from './components/Input';
+import {
+  Input as UndefinedInput
+} from 'undefined-inputs';
+
 import Range from './components/Range';
 import RangeGroup from './components/RangeGroup';
 import registerServiceWorker from './registerServiceWorker';
 
-let style = {
+const Input = styled(UndefinedInput)`
+  width: 48px;
+`;
+
+const style = {
   margin: '20px',
-  width: '210px',
-  height: '50px',
-  'backgroundColor': 'lightyellow'
+  width: '400px',
+  padding: '10px',
+  'backgroundColor': '#ccc'
 };
 
 ReactDOM.render(
@@ -21,35 +29,47 @@ ReactDOM.render(
       <Range value={30} min={0} max={200} />
     </div>
 
-    <RangeGroup style={style}>
-      <Range value={50} min={0} max={100} />
-    </RangeGroup>
-
-    <hr style={{marginTop: '50px'}}/>
-    <RangeGroup style={style}>
-      <Input value={123} icon='Y' />
-      <Range value={80} min={0} max={150} />
-    </RangeGroup>
-
-    <RangeGroup style={style}>
-      <Range value={80} min={0} max={150} />
-      <Input value={123} icon="Y" />
-    </RangeGroup>
-
-    <hr style={{marginTop: '50px'}}/>
-    <div style={{...style, width: '30px', height: '200px'}}>
-      <Range value={30} min={0} max={200} vertical={true} />
+    <div style={style}>
+      <RangeGroup style={style}>
+        <Range value={50} min={0} max={100} />
+      </RangeGroup>
     </div>
 
-    <RangeGroup direction='vertical' style={{...style, height: '200px', width: '86px'}}>
-      <Range value={80} min={0} max={150} />
-      <Input value={123} icon="Y" />
-    </RangeGroup>
+    <hr/>
 
-    <RangeGroup direction='vertical' style={{...style, height: '200px', width: '86px'}}>
-      <Input value={123} icon="Y" />
-      <Range value={80} min={0} max={150} />
-    </RangeGroup>
+    <div style={style}>
+      <RangeGroup style={style}>
+        <Input value={123} icon="Y" />
+        <Range value={80} min={0} max={150} />
+      </RangeGroup>
+    </div>
+
+    <div style={style}>
+      <RangeGroup style={style}>
+        <Range value={80} min={0} max={150} />
+        <Input value={123} icon="Y" />
+      </RangeGroup>
+    </div>
+
+    <hr/>
+
+    <div style={{...style, width: '60px', height: '200px'}}>
+      <Range value={30} min={0} max={200} direction="vertical" />
+    </div>
+
+    <div style={{...style, width: '60px', height: '200px'}}>
+      <RangeGroup direction='vertical'>
+        <Range value={80} min={0} max={150} />
+        <Input value={123} icon="Y" />
+      </RangeGroup>
+    </div>
+
+    <div style={{...style, width: '60px', height: '200px'}}>
+      <RangeGroup direction='vertical'>
+        <Input value={123} icon="Y" />
+        <Range value={80} min={0} max={150} />
+      </RangeGroup>
+    </div>
   </div>
   , document.getElementById('root')
 );

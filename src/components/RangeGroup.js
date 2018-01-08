@@ -1,44 +1,63 @@
-import React from 'react';
+import React, { Component } from 'react';
+import Range from './Range';
 
-class RangeGroup extends React.Component {
+class RangeGroup extends Component {
   constructor() {
     super();
+
     this.state = {};
   }
-  handleTextChange(val) {
-    console.log(`Text value recieved by parent: ${val}`);
-    let num = Number(val);
-    this.setState({value: (isNaN(num))? 0 : num});
-  };
-  handleSliderChange(val) {
-    console.log(`Slider value recieved by parent: ${val}`);
-    let num = Number(val);
-    this.setState({value: (isNaN(num))? 0 : num});
-  }
-  render() {
-    let side1 = 'left', side2 = 'right';
-    let mergeObj = {
-      handleTextChange: this.handleTextChange.bind(this),
-      handleSliderChange: this.handleSliderChange.bind(this)
-    };
-    if (this.props.direction && (this.props.direction === 'vertical')) {
-      mergeObj.vertical = true;
-      side1 = 'top', side2 = 'bottom';
-      }
-    if (this.state.value !== undefined) mergeObj.value = this.state.value;
 
-    if (this.props.children.length === 2) { return (
-      <div style = {this.props.style}>
-        {React.cloneElement(
-          this.props.children[0], Object.assign({side: side1}, mergeObj))}
-        {React.cloneElement(
-          this.props.children[1], Object.assign({side: side2}, mergeObj))}
-      </div>)}
-    else { return (
-      <div style={{...this.props.style}}>
-        {React.cloneElement(this.props.children, {
-          side: 'only'})}
-      </div>)
+  onChange = (value) => {
+    value = parseInt(value, 10) || 0;
+    this.setState({
+      value
+    });
+  }
+
+  render() {
+    const style = {
+      height: '100%',
+      textAlign: 'center'
+    };
+    
+    const children = this.props.children;
+    const itemsCount = children.length;
+    const direction = this.props.direction || 'horizontal';
+    const mergedProps = {
+      noInput: false,
+      side: '',
+      direction: this.props.direction,
+      onChange: this.onChange
+    };
+
+    if (this.state.value !== undefined) {
+      mergedProps.value = this.state.value; 
+    }
+
+    if (itemsCount === 2) {
+      if (direction === 'horizontal') {
+        mergedProps.side = (children[0].type === Range) ? 'left' : 'right';
+      } else {
+        mergedProps.side = (children[0].type === Range) ? 'top' : 'bottom';
+      }
+
+      return (
+        <div style={style}>
+          {React.cloneElement(
+            this.props.children[0], Object.assign(mergedProps))}
+          {React.cloneElement(
+            this.props.children[1], Object.assign(mergedProps))}
+        </div>
+      );
+    } else {
+      mergedProps.noInput = true;
+
+      return (
+        <div style={style}>
+          {React.cloneElement(children, mergedProps)}
+        </div>
+      );
     }
   }
 }

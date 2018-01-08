@@ -1,15 +1,17 @@
 {
-  "name": "component-template",
+  "name": "undefined-range",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "babel-cli": "^6.26.0",
     "font-awesome": "^4.7.0",
     "rc-slider": "^8.5.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-fontawesome": "^1.6.1",
     "react-scripts": "1.0.17",
-    "styled-components": "^2.2.4"
+    "styled-components": "^2.2.4",
+    "undefined-inputs": "https://github.com/UndefinedOU/undefined-inputs.git"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -18,7 +20,9 @@
     "eject": "react-scripts eject",
     "lint": "eslint src/**/*.js",
     "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public"
+    "compile": "NODE_ENV=production ./node_modules/.bin/babel src --out-dir dist --copy-files",
+    "build-storybook": "build-storybook -s public",
+    "prepublish": "npm run compile"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^3.2.17",
