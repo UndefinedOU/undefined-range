@@ -36,7 +36,7 @@ ReactDOM.render(React.createElement(
     { style: style },
     React.createElement(
       RangeGroup,
-      { style: style },
+      null,
       React.createElement(Range, { value: 50, min: 0, max: 100 })
     )
   ),
@@ -46,8 +46,8 @@ ReactDOM.render(React.createElement(
     { style: style },
     React.createElement(
       RangeGroup,
-      { style: style },
-      React.createElement(Input, { value: 123, icon: 'Y' }),
+      null,
+      React.createElement(Input, { value: 123, type: 'number' }),
       React.createElement(Range, { value: 80, min: 0, max: 150 })
     )
   ),
@@ -56,9 +56,9 @@ ReactDOM.render(React.createElement(
     { style: style },
     React.createElement(
       RangeGroup,
-      { style: style },
+      null,
       React.createElement(Range, { value: 80, min: 0, max: 150 }),
-      React.createElement(Input, { value: 123, icon: 'Y' })
+      React.createElement(Input, { value: 123, type: 'number' })
     )
   ),
   React.createElement('hr', null),
@@ -74,7 +74,7 @@ ReactDOM.render(React.createElement(
       RangeGroup,
       { direction: 'vertical' },
       React.createElement(Range, { value: 80, min: 0, max: 150 }),
-      React.createElement(Input, { value: 123, icon: 'Y' })
+      React.createElement(Input, { value: 123, type: 'number' })
     )
   ),
   React.createElement(
@@ -83,7 +83,7 @@ ReactDOM.render(React.createElement(
     React.createElement(
       RangeGroup,
       { direction: 'vertical' },
-      React.createElement(Input, { value: 123, icon: 'Y' }),
+      React.createElement(Input, { value: 123, type: 'number' }),
       React.createElement(Range, { value: 80, min: 0, max: 150 })
     )
   )

@@ -33,7 +33,7 @@ ReactDOM.render(
     </div>
 
     <div style={style}>
-      <RangeGroup style={style}>
+      <RangeGroup>
         <Range value={50} min={0} max={100} />
       </RangeGroup>
     </div>
@@ -41,16 +41,16 @@ ReactDOM.render(
     <hr/>
 
     <div style={style}>
-      <RangeGroup style={style}>
-        <Input value={123} icon="Y" />
+      <RangeGroup>
+        <Input value={123} type="number"/>
         <Range value={80} min={0} max={150} />
       </RangeGroup>
     </div>
 
     <div style={style}>
-      <RangeGroup style={style}>
+      <RangeGroup>
         <Range value={80} min={0} max={150} />
-        <Input value={123} icon="Y" />
+        <Input value={123} type="number"/>
       </RangeGroup>
     </div>
 
@@ -63,13 +63,13 @@ ReactDOM.render(
     <div style={{...style, width: '60px', height: '200px'}}>
       <RangeGroup direction='vertical'>
         <Range value={80} min={0} max={150} />
-        <Input value={123} icon="Y" />
+        <Input value={123} type="number"/>
       </RangeGroup>
     </div>
 
     <div style={{...style, width: '60px', height: '200px'}}>
       <RangeGroup direction='vertical'>
-        <Input value={123} icon="Y" />
+        <Input value={123} type="number"/>
         <Range value={80} min={0} max={150} />
       </RangeGroup>
     </div>
