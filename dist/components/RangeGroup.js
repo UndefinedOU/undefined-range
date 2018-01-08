@@ -32,6 +32,7 @@ var RangeGroup = function (_Component) {
     key: 'render',
     value: function render() {
       var style = {
+        width: '100%',
         height: '100%',
         textAlign: 'center'
       };
