@@ -10,8 +10,8 @@ import ReactDOM from 'react-dom';
 
 import { Input as UndefinedInput } from 'undefined-inputs';
 
-import Range from './components/Range';
-import RangeGroup from './components/RangeGroup';
+import { Range, RangeGroup } from './components';
+
 import registerServiceWorker from './registerServiceWorker';
 
 var Input = styled(UndefinedInput)(_templateObject);

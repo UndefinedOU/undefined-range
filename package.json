@@ -2,6 +2,7 @@
   "name": "undefined-range",
   "version": "0.1.0",
   "private": true,
+  "main": "dist/components/index.js",
   "dependencies": {
     "babel-cli": "^6.26.0",
     "font-awesome": "^4.7.0",
