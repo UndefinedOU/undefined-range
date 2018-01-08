@@ -16,11 +16,10 @@ class Range extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    let num = Number(nextProps.value);
-    if (isNaN(num)) num = (this.props.value || this.props.min || 0);
-    num = Math.max(num, this.props.min);
-    num = Math.min(num, this.props.max);
-    this.setState({value: num});
+    let value = parseInt(nextProps.value, 10);
+    if (value >= this.props.min && value <= this.props.max) {
+      this.onChange(value);
+    }
   }
 
   onChange = (value) => {

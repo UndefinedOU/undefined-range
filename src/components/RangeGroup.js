@@ -2,18 +2,26 @@ import React, { Component } from 'react';
 import Range from './Range';
 
 class RangeGroup extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
-    this.state = {};
+    this.state = {
+      value: this.props.value
+    };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.onChange(nextProps.value);
   }
 
   onChange = (value) => {
     value = parseInt(value, 10) || 0;
-    this.props.onChange && this.props.onChange(value);
-    this.setState({
-      value
-    });
+    if (this.state.value !== value) {
+      this.props.onChange && this.props.onChange(value);
+      this.setState({
+        value
+      });
+    }
   }
 
   render() {
@@ -24,18 +32,15 @@ class RangeGroup extends Component {
     };
     
     const children = this.props.children;
-    const itemsCount = children.length;
+    const itemsCount = React.Children.count(children);
     const direction = this.props.direction || 'horizontal';
     const mergedProps = {
+      value: this.state.value,
       noInput: false,
       side: '',
       direction: this.props.direction,
       onChange: this.onChange
     };
-
-    if (this.state.value !== undefined) {
-      mergedProps.value = this.state.value; 
-    }
 
     if (itemsCount === 2) {
       if (direction === 'horizontal') {

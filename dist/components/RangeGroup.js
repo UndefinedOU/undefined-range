@@ -12,24 +12,33 @@ import Range from './Range';
 var RangeGroup = function (_Component) {
   _inherits(RangeGroup, _Component);
 
-  function RangeGroup() {
+  function RangeGroup(props) {
     _classCallCheck(this, RangeGroup);
 
-    var _this = _possibleConstructorReturn(this, (RangeGroup.__proto__ || Object.getPrototypeOf(RangeGroup)).call(this));
+    var _this = _possibleConstructorReturn(this, (RangeGroup.__proto__ || Object.getPrototypeOf(RangeGroup)).call(this, props));
 
     _this.onChange = function (value) {
       value = parseInt(value, 10) || 0;
-      _this.props.onChange && _this.props.onChange(value);
-      _this.setState({
-        value: value
-      });
+      if (_this.state.value !== value) {
+        _this.props.onChange && _this.props.onChange(value);
+        _this.setState({
+          value: value
+        });
+      }
     };
 
-    _this.state = {};
+    _this.state = {
+      value: _this.props.value
+    };
     return _this;
   }
 
   _createClass(RangeGroup, [{
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      this.onChange(nextProps.value);
+    }
+  }, {
     key: 'render',
     value: function render() {
       var style = {
@@ -39,18 +48,15 @@ var RangeGroup = function (_Component) {
       };
 
       var children = this.props.children;
-      var itemsCount = children.length;
+      var itemsCount = React.Children.count(children);
       var direction = this.props.direction || 'horizontal';
       var mergedProps = {
+        value: this.state.value,
         noInput: false,
         side: '',
         direction: this.props.direction,
         onChange: this.onChange
       };
-
-      if (this.state.value !== undefined) {
-        mergedProps.value = this.state.value;
-      }
 
       if (itemsCount === 2) {
         if (direction === 'horizontal') {
