@@ -10,6 +10,7 @@ class RangeGroup extends Component {
 
   onChange = (value) => {
     value = parseInt(value, 10) || 0;
+    this.props.onChange && this.props.onChange(value);
     this.setState({
       value
     });

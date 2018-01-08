@@ -19,6 +19,7 @@ var RangeGroup = function (_Component) {
 
     _this.onChange = function (value) {
       value = parseInt(value, 10) || 0;
+      _this.props.onChange && _this.props.onChange(value);
       _this.setState({
         value: value
       });
